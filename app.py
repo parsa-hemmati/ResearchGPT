@@ -27,7 +27,15 @@ def fetch_pubmed_articles(query, email):
     pubmed_ids = record["IdList"]
 
     # Fetch details
-    handle = Entrez.efetch(db="pubmed", id=pubmed_ids, rettype="medline", retmode="text")
+    try:
+        handle = Entrez.efetch(db="pubmed", id=pubmed_ids, rettype="medline", retmode="text")
+    except urllib.error.HTTPError as err:
+        print("Error:", err)
+        print("URL:", err.url)
+        print("Headers:", err.headers)
+        print("Code:", err.code)
+        print("Message:", err.msg)
+
     records = parse(handle)
 
     # Extract information and create DataFrame
