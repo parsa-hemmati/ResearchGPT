@@ -102,8 +102,10 @@ def index():
 
     return render_template('index.html')
 
+
 @app.route('/results', methods=['GET'])
 def results():
+    print(session)  # Debugging line to print the session content
     csv_str = StringIO(session['df_csv'])
     df = pd.read_csv(csv_str)
 
