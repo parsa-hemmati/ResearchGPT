@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Research Results</title>
+</head>
+<body>
+    <div class="container">
+        {% for record in df.itertuples() %}
+            <article class="full-docsum" data-rel-pos="1">
+                <!-- HTML structure here, using record to fill in the details -->
+                <div class="docsum-wrap">
+                    <div class="docsum-content">
+                        <a class="docsum-title" href="{{ record.Abstract_Link }}" style="color: {% if record.relevancy == 'relevant' %}green{% else %}red{% endif %};">
+                            {{ record.relevancy.capitalize() }}: {{ record.Title }}
+                        </a>
+                        <div class="docsum-citation full-citation">
+                            <span class="docsum-authors full-authors">{{ record.Authors }}</span>
+                            <span class="docsum-journal-citation full-journal-citation">{{ record.Journal_Citation }}</span>
+                            <span class="citation-part">PMID: <span class="docsum-pmid">{{ record.PMID }}</span></span>
+                        </div>
+                        <div class="docsum-snippet">
+                            <div class="full-view-snippet">
+                                {{ record.Abstract }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+</body>
+</html>
