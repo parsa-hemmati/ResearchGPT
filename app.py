@@ -1,6 +1,7 @@
 from Bio import Entrez
 from Bio.Medline import parse
 from flask import Flask, render_template, request, redirect, url_for, session
+from flask_session import Session
 import openai
 import pandas as pd
 from io import StringIO
@@ -9,8 +10,9 @@ import os
 
 
 app = Flask(__name__)
-secret_key = os.urandom(24)
-app.secret_key = secret_key
+app.secret_key = os.urandom(24)
+app.config['SESSION_TYPE'] = 'filesystem'  # Store sessions server-side as files
+Session(app)
 
 
 def fetch_pubmed_articles(query, email):
