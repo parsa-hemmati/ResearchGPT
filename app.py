@@ -42,7 +42,7 @@ def fetch_pubmed_articles(query, email):
         data.append([pmid, title, authors, journal_citation, abstract, abstract_link])
 
     # Create DataFrame
-    df = pd.DataFrame(data, columns=['PMID', 'Title', 'Authors', 'Journal Citation', 'Abstract', 'Abstract Link'])
+    df = pd.DataFrame(data, columns=['PMID', 'Title', 'Authors', 'Journal Citation', 'Abstract', 'Abstract_Link'])
     return df
 
 def is_relevant(article, question, api_key):
