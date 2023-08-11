@@ -1,12 +1,17 @@
 from Bio import Entrez
 from Bio.Medline import parse
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import openai
 import pandas as pd
 from io import StringIO
 import csv
+import os
+
 
 app = Flask(__name__)
+secret_key = os.urandom(24)
+app.secret_key = secret_key
+
 
 def fetch_pubmed_articles(query, email):
     Entrez.email = email
